@@ -1,0 +1,294 @@
+<html>
+
+<head>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://unpkg.com/formiojs@3.9.0/dist/formio.full.min.css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/formiojs@3.9.0/dist/formio.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-json.min.js"></script>
+  
+  
+
+  <style>
+    body {
+      padding: 20px;
+    }
+
+    .tab-content.container {
+      border: 1px solid #ddd;
+      border-top: none;
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
+    pre {
+      height: 450px;
+      overflow-y: scroll;
+    }
+
+    body {
+      padding: 20px;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 70px;
+      height: 34px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: white;
+      border: 1px solid lightgray;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 3px;
+      background-color: lightgray;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked+.slider {
+      background-color: whtie;
+    }
+
+    input:checked+.slider:before {
+      background-color: #0080008a;
+    }
+
+    input:focus+.slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+      -webkit-transform: translateX(35px);
+      -ms-transform: translateX(35px);
+      transform: translateX(35px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container mt-3">
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active">
+        <a href="#builder" role="tab" data-toggle="tab">Builder</a>
+      </li>
+      <li role="presentation">
+        <a href="#form" role="tab" data-toggle="tab">Form</a>
+      </li>
+      <li role="presentation">
+        <a href="#result" role="tab" data-toggle="tab">Result</a>
+      </li>
+    </ul>
+    <div class="tab-content container">
+      <div class="tab-pane fade in active" id="builder" role="tabpanel">
+        <div id="formio-builder"></div>
+      </div>
+      <div class="tab-pane fade" id="form" role="tabpanel">
+        <pre><code class="language-javascript"></code></pre>
+      </div>
+      <div class="tab-pane fade" id="result" role="tabpanel">
+        <div id="formio-form">
+          Form not initialized
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+<script>
+  // Initialize the formio builder configuration (optional)
+  // Default cartegories: basic, advanced, layout, data
+  const options = {
+    builder: {
+      basic: {
+        // We can change the title of a category...
+        title: 'Basic'
+      },
+      advanced: {
+        title: 'Advanced'
+      },
+      layout: {
+        // ... or change its position...
+        title: 'Layout'
+      },
+      data: {
+        // ... or change its position...
+        title: 'Data'
+      },
+
+      // ... and even create custom categories
+      custom: {
+        title: 'Custom',
+        weight: 100,
+        components: {
+
+          toggle: {
+            title: 'Toggle Switch',
+            key: 'frm001_toggle',
+            icon: 'fa fa-toggle-on',
+            schema: {
+              "label": "HTML",
+              "tag": "div",
+              "className": "",
+              "attrs": [],
+              "content": "\r\n<div class=\"toggle-switch\">\r\n\t<label class=\"control-label\" style=\"\">Active</label><br/>\r\n\t<label class=\"switch\">\r\n\r\n\t  <input type=\"checkbox\" checked>\r\n\t  <span class=\"slider round\"></span>\r\n\t</label>\r\n</div>",
+              "refreshOnChange": false,
+              "mask": false,
+              "tableView": true,
+              "alwaysEnabled": false,
+              "type": "htmlelement",
+              "input": false,
+              "key": "html",
+              "placeholder": "",
+              "prefix": "",
+              "customClass": "",
+              "suffix": "",
+              "multiple": false,
+              "defaultValue": null,
+              "protected": false,
+              "unique": false,
+              "persistent": false,
+              "hidden": false,
+              "clearOnHide": true,
+              "dataGridLabel": false,
+              "labelPosition": "top",
+              "labelWidth": 30,
+              "labelMargin": 3,
+              "description": "",
+              "errorLabel": "",
+              "tooltip": "",
+              "hideLabel": false,
+              "tabindex": "",
+              "disabled": false,
+              "autofocus": false,
+              "dbIndex": false,
+              "customDefaultValue": "",
+              "calculateValue": "",
+              "allowCalculateOverride": false,
+              "widget": null,
+              "refreshOn": "",
+              "clearOnRefresh": false,
+              "validateOn": "change",
+              "validate": {
+                "required": false,
+                "custom": "",
+                "customPrivate": false
+              },
+              "conditional": {
+                "show": null,
+                "when": null,
+                "eq": ""
+              },
+            }
+          },
+
+          phoneNumber: {
+            title: 'Mobile Phone',
+            key: 'frm001_mobile',
+            icon: 'fa fa-phone-square',
+            schema: {
+              label: 'Mobile Phone',
+              type: 'phoneNumber',
+              key: 'frm001_mobile',
+              input: true
+            }
+          }
+        }
+      },
+    }
+  };
+
+
+  // Initialize the form.io form JSON object
+  const form = {
+    components: [
+      {
+        key: 'textfield',
+        type: 'textfield',
+        validate: {
+          required: true
+        }
+      },
+      {
+        key: 'datetime',
+        type: 'datetime'
+      },
+      {
+        key: 'submit',
+        type: 'button',
+        theme: 'primary'
+      }
+    ]
+  };
+
+  const formio = {
+    builder: null,
+    form: null
+  };
+
+  // Initialize the formio form instance
+  Formio.createForm(document.getElementById('formio-form'), form)
+    .then((instance) => {
+      formio.form = instance;
+    });
+
+  // Initialize the formio builder instance
+  Formio.builder(document.getElementById('formio-builder'), form, options)
+    .then((instance) => {
+      formio.builder = instance;
+      // Define the on render event of the formio builder instance
+      formio.builder.on('render', () => {
+        // Update the formio form object and re render the form
+        formio.form.form = form;
+        formio.form.render();
+
+        // Update the json code using Prism.js
+        document.querySelector('code').innerHTML = Prism.highlight(JSON.stringify(form, null, 2), Prism.languages.json, 'json');
+      });
+      document.querySelector('code').innerHTML = Prism.highlight(JSON.stringify(form, null, 2), Prism.languages.json, 'json');
+    });
+
+
+
+</script>
+
+</html>
