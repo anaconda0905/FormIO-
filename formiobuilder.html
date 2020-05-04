@@ -204,11 +204,42 @@
     .newCalendar .input-group-append {
       display: none;
     }
+
+    .newAdditem .choices.form-group.formio-choices {
+      display: inline-block;
+      float: right;
+      width: 95%;
+      margin-top: -38px;
+    }
+
+    .newAdditem .form-control.ui.fluid.selection.dropdown {
+      border-radius: 0px 4px 4px 0px;
+    }
+    
+
+    .newAdditem .user-icon-item {
+      display: block;
+      text-align: center;
+      width: 5%;
+      cursor: pointer;
+      background-color: white;
+      padding: .375rem;
+      border-radius: 0;
+      height: 38px;
+      border-bottom-left-radius: 5px;
+      border-top-left-radius: 5px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+    }
+
+    .newAdditem .plus-item{
+      display: inline-block;
+      margin-left: 8px;
+      color: dodgerblue;
+      cursor: pointer;
+    }
   </style>
   <script type='text/javascript'>
-    $('.color-wrapper').on('click', function () {
-      alert('d');
-    });
+
     const form = {
       components: [
 
@@ -536,7 +567,104 @@
                   "eq": ""
                 },
               }
-            }
+            },
+            selectadditem: {
+              title: 'Select add item',
+              key: 'frm001_item',
+              icon: 'fa fa-phone-square',
+              schema: {
+                "label": "Select",
+                "customClass": "newAdditem",
+                "mask": false,
+                "tableView": true,
+                "alwaysEnabled": false,
+                "type": "select",
+                "input": true,
+                "key": "select",
+                "defaultValue": "",
+                "data": {
+                  "values": [
+                    {
+                      "label": "value1",
+                      "value": "value1"
+                    },
+                    {
+                      "label": "value2",
+                      "value": "value2"
+                    },
+                    {
+                      "label": "value3",
+                      "value": "value3"
+                    },
+                    {
+                      "label": "value4",
+                      "value": "value4"
+                    },
+                    {
+                      "label": "value5",
+                      "value": "value5"
+                    },
+                    {
+                      "label": "",
+                      "value": ""
+                    }
+                  ],
+                  "json": "",
+                  "url": "",
+                  "resource": "",
+                  "custom": ""
+                },
+                "encrypted": false,
+                "valueProperty": "value",
+                "placeholder": "",
+                "prefix": "",
+                "suffix": "",
+                "multiple": false,
+                "protected": false,
+                "unique": false,
+                "persistent": true,
+                "hidden": false,
+                "clearOnHide": true,
+                "dataGridLabel": false,
+                "labelPosition": "top",
+                "labelWidth": 30,
+                "labelMargin": 3,
+                "description": "",
+                "errorLabel": "",
+                "tooltip": "",
+                "hideLabel": false,
+                "tabindex": "",
+                "disabled": false,
+                "autofocus": false,
+                "dbIndex": false,
+                "customDefaultValue": "",
+                "calculateValue": "",
+                "allowCalculateOverride": false,
+                "widget": null,
+                "refreshOn": "",
+                "clearOnRefresh": false,
+                "validateOn": "change",
+                "validate": {
+                  "required": false,
+                  "custom": "",
+                  "customPrivate": false
+                },
+                "conditional": {
+                  "show": null,
+                  "when": null,
+                  "eq": ""
+                },
+                "dataSrc": "values",
+                "filter": "",
+                "searchEnabled": true,
+                "searchField": "",
+                "minSearch": 0,
+                "authenticate": false,
+                "template": "<span>{{ item.label }}</span>",
+                "selectFields": "",
+              }
+            },
+
           }
         },
 
@@ -553,6 +681,8 @@
           // Update the formio form object and re render the form
           // formio.form.render();
           myfonticon();
+          $('.newAdditem label').after('<div class="plus-item"><i class="fa fa-plus-circle" style="font-size: 15px;"></i></div><div class="user-icon-item"><i class="fa fa-user-o" style="font-size: 15px;"></i></div>');
+
           $('.color-wrapper').click(function (event) {
 
             //console.log(tab);
@@ -619,8 +749,12 @@
 
             });
           });
+          $('.plus-item').click(function(){
+            $(this).parent().parent().find('.component-settings-button-edit').click();
+          });
         });
         myfonticon();
+        
         $('body').click(function () {
           $('.color-picker').fadeOut();
           $('.color-picker-content').remove();
