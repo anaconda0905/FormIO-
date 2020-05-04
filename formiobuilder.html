@@ -7,7 +7,9 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+  
+  <link rel="stylesheet" href="https://oss.maxcdn.com/semantic-ui/2.1.8/semantic.min.css">
+  <script src="https://oss.maxcdn.com/semantic-ui/2.1.8/semantic.min.js"></script>
 
   <!-- fip stuff -->
   <script type="text/javascript"
@@ -57,8 +59,8 @@
     .switch {
       position: relative;
       display: inline-block;
-      width: 70px;
-      height: 34px;
+      width: 63px;
+      height: 28px;
     }
 
     .switch input {
@@ -83,10 +85,10 @@
     .slider:before {
       position: absolute;
       content: "";
-      height: 26px;
-      width: 26px;
-      left: 4px;
-      bottom: 3px;
+      height: 23px;
+      width: 23px;
+      left: 1px;
+      bottom: 2px;
       background-color: lightgray;
       -webkit-transition: .4s;
       transition: .4s;
@@ -230,6 +232,25 @@
       border-top-left-radius: 5px;
       border: 1px solid rgba(0, 0, 0, 0.15);
     }
+    .newAdditem .user-icon-item::after {
+      display: inline-block;
+      margin-left: 2px;
+      margin-top: 10px;
+      vertical-align: .255em;
+      content: "";
+      color: dodgerblue;
+      border-top: .2em solid;
+      border-right: .2em solid transparent;
+      border-bottom: 0;
+      border-left: .2em solid transparent;
+    }
+
+    .newAdditem .user-icon-item::before {
+      font-family: FontAwesome;
+      display: inline-block;
+      content:"\f2c0";
+      color: dodgerblue;
+    }
 
     .newAdditem .plus-item{
       display: inline-block;
@@ -271,6 +292,102 @@
         premium: {
           title: 'Premium',
           components: {
+            selectadditem: {
+              title: 'Select add item',
+              key: 'frm001_item',
+              icon: 'user-o',
+              schema: {
+                "label": "Select",
+                "customClass": "newAdditem",
+                "mask": false,
+                "tableView": true,
+                "alwaysEnabled": false,
+                "type": "select",
+                "input": true,
+                "key": "select",
+                "defaultValue": "",
+                "data": {
+                  "values": [
+                    {
+                      "label": "value1",
+                      "value": "value1"
+                    },
+                    {
+                      "label": "value2",
+                      "value": "value2"
+                    },
+                    {
+                      "label": "value3",
+                      "value": "value3"
+                    },
+                    {
+                      "label": "value4",
+                      "value": "value4"
+                    },
+                    {
+                      "label": "value5",
+                      "value": "value5"
+                    },
+                    {
+                      "label": "",
+                      "value": ""
+                    }
+                  ],
+                  "json": "",
+                  "url": "",
+                  "resource": "",
+                  "custom": ""
+                },
+                "encrypted": false,
+                "valueProperty": "value",
+                "placeholder": "",
+                "prefix": "",
+                "suffix": "",
+                "multiple": false,
+                "protected": false,
+                "unique": false,
+                "persistent": true,
+                "hidden": false,
+                "clearOnHide": true,
+                "dataGridLabel": false,
+                "labelPosition": "top",
+                "labelWidth": 30,
+                "labelMargin": 3,
+                "description": "",
+                "errorLabel": "",
+                "tooltip": "",
+                "hideLabel": false,
+                "tabindex": "",
+                "disabled": false,
+                "autofocus": false,
+                "dbIndex": false,
+                "customDefaultValue": "",
+                "calculateValue": "",
+                "allowCalculateOverride": false,
+                "widget": null,
+                "refreshOn": "",
+                "clearOnRefresh": false,
+                "validateOn": "change",
+                "validate": {
+                  "required": false,
+                  "custom": "",
+                  "customPrivate": false
+                },
+                "conditional": {
+                  "show": null,
+                  "when": null,
+                  "eq": ""
+                },
+                "dataSrc": "values",
+                "filter": "",
+                "searchEnabled": true,
+                "searchField": "",
+                "minSearch": 0,
+                "authenticate": false,
+                "template": "<span>{{ item.label }}</span>",
+                "selectFields": "",
+              }
+            },
 
             toggle: {
               title: 'Toggle Switch',
@@ -568,103 +685,7 @@
                 },
               }
             },
-            selectadditem: {
-              title: 'Select add item',
-              key: 'frm001_item',
-              icon: 'fa fa-phone-square',
-              schema: {
-                "label": "Select",
-                "customClass": "newAdditem",
-                "mask": false,
-                "tableView": true,
-                "alwaysEnabled": false,
-                "type": "select",
-                "input": true,
-                "key": "select",
-                "defaultValue": "",
-                "data": {
-                  "values": [
-                    {
-                      "label": "value1",
-                      "value": "value1"
-                    },
-                    {
-                      "label": "value2",
-                      "value": "value2"
-                    },
-                    {
-                      "label": "value3",
-                      "value": "value3"
-                    },
-                    {
-                      "label": "value4",
-                      "value": "value4"
-                    },
-                    {
-                      "label": "value5",
-                      "value": "value5"
-                    },
-                    {
-                      "label": "",
-                      "value": ""
-                    }
-                  ],
-                  "json": "",
-                  "url": "",
-                  "resource": "",
-                  "custom": ""
-                },
-                "encrypted": false,
-                "valueProperty": "value",
-                "placeholder": "",
-                "prefix": "",
-                "suffix": "",
-                "multiple": false,
-                "protected": false,
-                "unique": false,
-                "persistent": true,
-                "hidden": false,
-                "clearOnHide": true,
-                "dataGridLabel": false,
-                "labelPosition": "top",
-                "labelWidth": 30,
-                "labelMargin": 3,
-                "description": "",
-                "errorLabel": "",
-                "tooltip": "",
-                "hideLabel": false,
-                "tabindex": "",
-                "disabled": false,
-                "autofocus": false,
-                "dbIndex": false,
-                "customDefaultValue": "",
-                "calculateValue": "",
-                "allowCalculateOverride": false,
-                "widget": null,
-                "refreshOn": "",
-                "clearOnRefresh": false,
-                "validateOn": "change",
-                "validate": {
-                  "required": false,
-                  "custom": "",
-                  "customPrivate": false
-                },
-                "conditional": {
-                  "show": null,
-                  "when": null,
-                  "eq": ""
-                },
-                "dataSrc": "values",
-                "filter": "",
-                "searchEnabled": true,
-                "searchField": "",
-                "minSearch": 0,
-                "authenticate": false,
-                "template": "<span>{{ item.label }}</span>",
-                "selectFields": "",
-              }
-            },
-
+            
           }
         },
 
@@ -681,7 +702,7 @@
           // Update the formio form object and re render the form
           // formio.form.render();
           myfonticon();
-          $('.newAdditem label').after('<div class="plus-item"><i class="fa fa-plus-circle" style="font-size: 15px;"></i></div><div class="user-icon-item"><i class="fa fa-user-o" style="font-size: 15px;"></i></div>');
+          $('.newAdditem label').after('<div class="plus-item"><i class="fa fa-plus-circle" style="font-size: 15px;"></i></div><div class="user-icon-item ui dropdown"><div class=\'menu\'><div class=\'item\'>Customer</div></div></div>');
 
           $('.color-wrapper').click(function (event) {
 
@@ -752,6 +773,7 @@
           $('.plus-item').click(function(){
             $(this).parent().parent().find('.component-settings-button-edit').click();
           });
+          $('.dropdown').dropdown();
         });
         myfonticon();
         
