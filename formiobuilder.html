@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -117,8 +118,97 @@
     .slider.round:before {
       border-radius: 50%;
     }
+
+    .color-wrapper {
+      background-color: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      border-radius: .25rem;
+      display: flex;
+      /* width: 100%; */
+    }
+
+    input.call-picker {
+      border: 1px solid #AAA;
+      color: #666;
+      text-transform: uppercase;
+      float: left;
+      outline: none;
+      padding: 10px;
+      text-transform: uppercase;
+      width: 85px;
+    }
+
+    .color-picker {
+      width: auto;
+      background: #F3F3F3;
+      height: 120px;
+      padding: 10px;
+      overflow: auto;
+      box-shadow: 0px 0px 1px 1px #DDD;
+    }
+
+    .color-holder {
+      background: #fff;
+      cursor: pointer;
+      border: 1px solid #AAA;
+      width: 98%;
+      float: left;
+      border: 1px dotted gray;
+      height: 24px;
+    }
+
+    .drop-sign {
+      width: 34px;
+    }
+
+    .drop-sign::after {
+      display: inline-block;
+      margin-left: 24px;
+      margin-top: 10px;
+      vertical-align: .255em;
+      content: "";
+      border-top: .3em solid;
+      border-right: .3em solid transparent;
+      border-bottom: 0;
+      border-left: .3em solid transparent;
+    }
+
+    .color-picker-content {
+      float: left;
+      margin-left: 2px;
+      margin-right: 2px;
+      margin-bottom: 5px;
+    }
+
+    .color-picker .color-item:hover::before {
+      content: "\2713";
+      z-index: 100;
+      color: white;
+      margin-left: 15px;
+    }
+
+    .color-picker .color-item {
+      cursor: pointer;
+      width: 40px;
+      height: 25px;
+      list-style-type: none;
+    }
+
+    .newCalendar .form-control.input {
+      border-radius: 5px;
+    }
+
+    .newCalendar .input-group-append {
+      display: none;
+    }
   </style>
   <script type='text/javascript'>
+    $('.color-wrapper').on('click', function () {
+      alert('d');
+    });
     const form = {
       components: [
 
@@ -278,6 +368,8 @@
               schema: {
                 "label": "Date / Time",
                 "format": "yyyy-MM-dd",
+                "placeholder": "YYYY-MM-DD",
+                "customClass": "newCalendar",
                 "tableView": false,
                 "enableMinDateInput": false,
                 "datePicker": {
@@ -318,9 +410,7 @@
                   "disableWeekdays": false,
                   "maxDate": null
                 },
-                "placeholder": "",
                 "prefix": "",
-                "customClass": "",
                 "multiple": false,
                 "defaultValue": "",
                 "protected": false,
@@ -387,6 +477,65 @@
                 },
                 "customOptions": {},
               }
+            },
+            ColorPicker: {
+              title: 'Color Picker',
+              key: 'frm001_color',
+              icon: 'newspaper-o',
+              schema: {
+                "label": "HTML",
+                "tag": "div",
+                "className": "",
+                "attrs": [],
+                "content": "<div>\r\n        <label class=\"control-label\">Color Component Label</label><br />\r\n        <input type=\"hidden\" name=\"custom_color\" placeholder=\"#FFFFFF\" class=\"call-picker\">\r\n        <div onclick=\"myfunc($(this))\" class=\"color-wrapper\" >\r\n            <div class=\"color-holder call-picker\"></div>\r\n            <div class=\"drop-sign\"></div>\r\n        </div>\r\n        <div class=\"color-picker\" style=\"display: none\"></div>\r\n    </div>",
+                "refreshOnChange": false,
+                "mask": false,
+                "tableView": true,
+                "alwaysEnabled": false,
+                "type": "htmlelement",
+                "input": false,
+                "key": "html",
+                "placeholder": "",
+                "prefix": "",
+                "customClass": "",
+                "suffix": "",
+                "multiple": false,
+                "defaultValue": null,
+                "protected": false,
+                "unique": false,
+                "persistent": false,
+                "hidden": false,
+                "clearOnHide": true,
+                "dataGridLabel": false,
+                "labelPosition": "top",
+                "labelWidth": 30,
+                "labelMargin": 3,
+                "description": "",
+                "errorLabel": "",
+                "tooltip": "",
+                "hideLabel": false,
+                "tabindex": "",
+                "disabled": false,
+                "autofocus": false,
+                "dbIndex": false,
+                "customDefaultValue": "",
+                "calculateValue": "",
+                "allowCalculateOverride": false,
+                "widget": null,
+                "refreshOn": "",
+                "clearOnRefresh": false,
+                "validateOn": "change",
+                "validate": {
+                  "required": false,
+                  "custom": "",
+                  "customPrivate": false
+                },
+                "conditional": {
+                  "show": null,
+                  "when": null,
+                  "eq": ""
+                },
+              }
             }
           }
         },
@@ -404,11 +553,147 @@
           // Update the formio form object and re render the form
           // formio.form.render();
           myfonticon();
+          $('.color-wrapper').click(function (event) {
+
+            //console.log(tab);
+            var colorList = [
+              '255, 22, 84',
+              '34, 177, 219',
+              '84, 84, 225',
+              '36, 123, 160',
+              '160, 36, 123',
+              '123, 160, 36',
+              '34, 122, 122',
+              '160, 160, 23',
+              '36, 210, 36',
+              '112, 193, 179',
+              '146, 179, 0',
+              '0, 179, 146',
+              '203, 177, 219',
+              '177, 219, 203',
+              '193, 191, 112',
+              '0,0,128',
+              '0,128,128',
+              '128,0,128',
+              '0,128,0',
+              '128,128,0',
+              '128,0,0',
+              '128,128,128',
+              '192,192,192',
+              '255,0,255',
+              '0,255,255',
+              '255,255,0',
+              '22, 84, 225',
+              '0,0,255',
+              '0,255,0',
+              '255,0,0',
+              '0,0,0',
+              '0,102,102',
+              '102,102,0',
+              '102,0,102',
+            ];
+
+            $('.color-picker').fadeOut();
+            $('.color-picker-content').remove();
+            var picker = $(this).parent().find('.color-picker');
+
+            for (var i = 0; i < colorList.length; i++) {
+              picker.append('<div class="color-picker-content"><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',1)" style="background-color:' + 'rgba(' + colorList[i] + ',1);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.8)" style="background-color:' + 'rgba(' + colorList[i] + ',0.8);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.6)" style="background-color:' + 'rgba(' + colorList[i] + ',0.6);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.4)" style="background-color:' + 'rgba(' + colorList[i] + ',0.4);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.2)" style="background-color:' + 'rgba(' + colorList[i] + ',0.2);"></li></div>');
+            }
+            event.stopPropagation();
+            picker.fadeIn();
+            picker.find('li').hover(function () {
+              var codeHex = $(this).data('hex');
+              $(this).parent().parent().parent().find('.color-holder').css('background-color', codeHex);
+              $(this).parent().parent().parent().find('input').val(codeHex);
+            });
+            picker.find('li').mouseleave(function () {
+
+              $(this).parent().parent().parent().find('.color-holder').css('background-color', 'white');
+            });
+
+            picker.find('li').click(function () {
+              var codeHex = $(this).data('hex');
+              $(this).parent().parent().parent().find('.color-holder').css('background-color', codeHex);
+              $(this).parent().parent().parent().find('input').val(codeHex);
+
+            });
+          });
         });
         myfonticon();
+        $('body').click(function () {
+          $('.color-picker').fadeOut();
+          $('.color-picker-content').remove();
+        });
       });
     };
 
+    function myfunc(tab) {
+      // console.log(tab);
+      var colorList = [
+        '255, 22, 84',
+        '34, 177, 219',
+        '84, 84, 225',
+        '36, 123, 160',
+        '160, 36, 123',
+        '123, 160, 36',
+        '34, 122, 122',
+        '160, 160, 23',
+        '36, 210, 36',
+        '112, 193, 179',
+        '146, 179, 0',
+        '0, 179, 146',
+        '203, 177, 219',
+        '177, 219, 203',
+        '193, 191, 112',
+        '112, 191, 112',
+        '0,0,128',
+        '0,128,128',
+        '128,0,128',
+        '0,128,0',
+        '128,128,0',
+        '128,0,0',
+        '128,128,128',
+        '192,192,192',
+        '255,0,255',
+        '0,255,255',
+        '255,255,0',
+        '22, 84, 225',
+        '0,0,255',
+        '0,255,0',
+        '255,0,0',
+        '0,0,0',
+        '0,102,102',
+        '102,102,0',
+        '102,0,102',
+      ];
+
+      // $('.color-picker').fadeOut();
+      $('.color-picker-content').remove();
+      var picker = tab.parent().find('.color-picker');
+
+      for (var i = 0; i < colorList.length; i++) {
+        picker.append('<div class="color-picker-content"><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',1)" style="background-color:' + 'rgba(' + colorList[i] + ',1);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.8)" style="background-color:' + 'rgba(' + colorList[i] + ',0.8);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.6)" style="background-color:' + 'rgba(' + colorList[i] + ',0.6);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.4)" style="background-color:' + 'rgba(' + colorList[i] + ',0.4);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.2)" style="background-color:' + 'rgba(' + colorList[i] + ',0.2);"></li></div>');
+      }
+      event.stopPropagation();
+      picker.fadeIn();
+      picker.find('li').hover(function () {
+        var codeHex = $(this).data('hex');
+        $(this).parent().parent().parent().find('.color-holder').css('background-color', codeHex);
+        $(this).parent().parent().parent().find('input').val(codeHex);
+      });
+      picker.find('li').mouseleave(function () {
+
+        $(this).parent().parent().parent().find('.color-holder').css('background-color', 'white');
+      });
+
+      picker.find('li').click(function () {
+        var codeHex = $(this).data('hex');
+        $(this).parent().parent().parent().find('.color-holder').css('background-color', codeHex);
+        $(this).parent().parent().parent().find('input').val(codeHex);
+
+      });
+    }
     function myfonticon() {
       var icomoonIcons = {
         'Web Applications': [57436, 57437, 57438, 57439, 57524, 57525, 57526, 57527, 57528, 57531, 57532, 57533, 57534, 57535, 57536, 57537, 57541, 57545, 57691, 57692],
@@ -469,6 +754,7 @@
         'Boss-5', 'Burglar', 'Bus', 'Businesswoman-1', 'Camera-Front',
         'Candles', 'Canoe', 'Captain-Shield', 'Candy', 'Cement-Mixer',
         'Car-Jumper', 'Checklist', 'Cheese', 'Cashier-2', 'Chair-4', 'Chat-2'];
+
       $('.myfonticon input').fontIconPicker({
         source: fontelloIcons,
         theme: 'fip-bootstrap',

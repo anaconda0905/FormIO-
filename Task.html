@@ -5,9 +5,31 @@
   <link rel='stylesheet' href='https://unpkg.com/formiojs@3.9.0/dist/formio.full.min.css'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript"
+    src="https://unpkg.com/@fonticonpicker/fonticonpicker/dist/js/jquery.fonticonpicker.min.js"></script>
+  <link rel="stylesheet" type="text/css"
+    href="https://unpkg.com/@fonticonpicker/fonticonpicker/dist/css/base/jquery.fonticonpicker.min.css">
 
+  <link rel="stylesheet" type="text/css"
+    href="https://unpkg.com/@fonticonpicker/fonticonpicker/dist/css/themes/bootstrap-theme/jquery.fonticonpicker.bootstrap.min.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://unpkg.com/@fonticonpicker/fonticonpicker/dist/css/themes/dark-grey-theme/jquery.fonticonpicker.darkgrey.min.css">
 
+  <link rel="stylesheet" type="text/css"
+    href="https://unpkg.com/@fonticonpicker/fonticonpicker/dist/css/themes/grey-theme/jquery.fonticonpicker.grey.min.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://unpkg.com/@fonticonpicker/fonticonpicker/dist/css/themes/inverted-theme/jquery.fonticonpicker.inverted.min.css">
+  <!-- icons -->
+  <link rel="stylesheet" href="icomoon/style.css">
+  <link rel="stylesheet" href="fontello-7275ca86/css/fontello.css">
+  <script src="demo.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://unpkg.com/formiojs@3.9.0/dist/formio.full.min.js"></script>
@@ -102,6 +124,93 @@
     .slider.round:before {
       border-radius: 50%;
     }
+    * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #f9f9f9;
+            color: #666;
+            font: 11px/14px Arial, Helvetica, sans-serif;
+        }
+
+        .color-wrapper {
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: .25rem;
+            display: flex;
+        }
+
+        input.call-picker {
+            border: 1px solid #AAA;
+            color: #666;
+            text-transform: uppercase;
+            float: left;
+            outline: none;
+            padding: 10px;
+            text-transform: uppercase;
+            width: 85px;
+        }
+
+        .color-picker {
+            width: auto;
+            background: #F3F3F3;
+            height: 120px;
+            padding: 10px;
+            overflow: auto;
+            box-shadow: 0px 0px 1px 1px #DDD;
+        }
+
+        .color-holder {
+            background: #fff;
+            cursor: pointer;
+            border: 1px solid #AAA;
+            width: 95%;
+            float: left;
+            border: 1px dotted gray;
+            height: 24px;
+        }
+
+        .drop-sign {
+            width: 34px;
+        }
+
+        .drop-sign::after {
+            display: inline-block;
+            margin-left: 17px;
+            margin-top: 10px;
+            vertical-align: .255em;
+            content: "";
+            border-top: .4em solid;
+            border-right: .4em solid transparent;
+            border-bottom: 0;
+            border-left: .4em solid transparent;
+        }
+
+        .color-picker-content {
+            float: left;
+            margin-left: 2px;
+            margin-right: 2px;
+            margin-bottom: 5px;
+        }
+
+        .color-picker .color-item:hover::before {
+            content: "\2713";
+            z-index: 100;
+            color: white;
+            margin-left: 15px;
+        }
+
+        .color-picker .color-item {
+            cursor: pointer;
+            width: 40px;
+            height: 25px;
+            list-style-type: none;
+        }
   </style>
 </head>
 
@@ -135,6 +244,66 @@
   </div>
 </body>
 <script>
+  $('body').click(function () {
+        $('.color-picker').fadeOut();
+        $('.color-picker-content').remove();
+    });
+  function myfunc(tab) {
+        console.log(tab);
+        var colorList = [
+            '255, 22, 84',
+            '36, 123, 160',
+            '112, 193, 179',
+            '146, 179, 0',
+            '203, 177, 219',
+            '193, 191, 112',
+            '0,0,128',
+            '0,128,128',
+            '128,0,128',
+            '0,128,0',
+            '128,128,0',
+            '128,0,0',
+            '128,128,128',
+            '192,192,192',
+            '255,0,255',
+            '0,255,255',
+            '255,255,0',
+            '0,0,255',
+            '0,255,0',
+            '255,0,0',
+            '0,0,0',
+            '0,102,102',
+            '102,102,0',
+            '102,0,102'
+        ];
+
+        // $('.color-picker').fadeOut();
+        $('.color-picker-content').remove();
+        var picker = tab.parent().find('.color-picker');
+
+        for (var i = 0; i < colorList.length; i++) {
+            picker.append('<div class="color-picker-content"><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',1)" style="background-color:' + 'rgba(' + colorList[i] + ',1);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.8)" style="background-color:' + 'rgba(' + colorList[i] + ',0.8);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.6)" style="background-color:' + 'rgba(' + colorList[i] + ',0.6);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.4)" style="background-color:' + 'rgba(' + colorList[i] + ',0.4);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.2)" style="background-color:' + 'rgba(' + colorList[i] + ',0.2);"></li></div>');
+        }
+        event.stopPropagation();
+        picker.fadeIn();
+        picker.find('li').hover(function () {
+            var codeHex = $(this).data('hex');
+            $(this).parent().parent().parent().find('.color-holder').css('background-color', codeHex);
+            $(this).parent().parent().parent().find('input').val(codeHex);
+        });
+        picker.find('li').mouseleave(function () {
+
+            $(this).parent().parent().parent().find('.color-holder').css('background-color', 'white');
+        });
+
+        picker.find('li').click(function () {
+            var codeHex = $(this).data('hex');
+            $(this).parent().parent().parent().find('.color-holder').css('background-color', codeHex);
+            $(this).parent().parent().parent().find('input').val(codeHex);
+
+        });
+    }
+
   // Initialize the formio builder configuration (optional)
   // Default cartegories: basic, advanced, layout, data
   const options = {
