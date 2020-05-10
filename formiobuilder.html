@@ -8,9 +8,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="https://oss.maxcdn.com/semantic-ui/2.1.8/semantic.min.css">
-  <script src="https://oss.maxcdn.com/semantic-ui/2.1.8/semantic.min.js"></script>
-
   <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'>
   <link rel='stylesheet' href='https://unpkg.com/formiojs@latest/dist/formio.full.min.css'>
   <script src='https://unpkg.com/formiojs@latest/dist/formio.full.min.js'></script>
@@ -19,6 +16,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-javascript.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-json.min.js"></script>
+
+  <link rel="stylesheet" href="https://oss.maxcdn.com/semantic-ui/2.1.8/semantic.min.css">
+  <script src="https://oss.maxcdn.com/semantic-ui/2.1.8/semantic.min.js"></script>
   <style>
     body {
       padding: 20px;
@@ -698,6 +698,8 @@
           $('.plus-item').click(function () {
             $(this).parent().parent().find('.component-settings-button-edit').click();
           });
+          $('.dropdown').dropdown();
+          colorpicker();
           document.querySelector('#formjson').innerHTML = Prism.highlight(JSON.stringify(form, null, 2), Prism.languages.json, 'json');
           document.querySelector('#resultjson').innerHTML = Prism.highlight(JSON.stringify(formio.form.submission, null, 4), Prism.languages.json, 'json');
         });
@@ -706,8 +708,8 @@
         $('.plus-item').click(function () {
           $(this).parent().parent().find('.component-settings-button-edit').click();
         });
-
-        
+        $('.dropdown').dropdown();
+        colorpicker();
 
         Formio.createForm(document.getElementById('formio-form'), form)
           .then((instance) => {
@@ -717,8 +719,8 @@
         // document.querySelector('#resultjson').innerHTML = Prism.highlight(JSON.stringify(formio.form.submission, null, 4), Prism.languages.json, 'json');
       });
     };
-
-    function myfunc(tab) {
+    function colorpicker(){
+      $('.color-wrapper').click(function (event) {
       // console.log(tab);
       var colorList = [
         '255, 22, 84',
@@ -760,7 +762,7 @@
 
       // $('.color-picker').fadeOut();
       $('.color-picker-content').remove();
-      var picker = tab.parent().find('.color-picker');
+      var picker = $(this).parent().find('.color-picker');
 
       for (var i = 0; i < colorList.length; i++) {
         picker.append('<div class="color-picker-content"><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',1)" style="background-color:' + 'rgba(' + colorList[i] + ',1);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.8)" style="background-color:' + 'rgba(' + colorList[i] + ',0.8);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.6)" style="background-color:' + 'rgba(' + colorList[i] + ',0.6);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.4)" style="background-color:' + 'rgba(' + colorList[i] + ',0.4);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.2)" style="background-color:' + 'rgba(' + colorList[i] + ',0.2);"></li></div>');
@@ -783,8 +785,12 @@
         $(this).parent().parent().parent().find('input').val(codeHex);
 
       });
+    });
+      $('body').click(function () {
+          $('.color-picker').fadeOut();
+          $('.color-picker-content').remove();
+      });
     }
-    
 
   </script>
 </head>
