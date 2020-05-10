@@ -2,13 +2,14 @@
 <html>
 
 <head>
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+    integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <link rel='stylesheet' href='https://unpkg.com/formiojs@latest/dist/formio.full.min.css'>
   <script src='https://unpkg.com/formiojs@latest/dist/formio.full.min.js'></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -19,6 +20,10 @@
 
   <link rel="stylesheet" href="https://oss.maxcdn.com/semantic-ui/2.1.8/semantic.min.css">
   <script src="https://oss.maxcdn.com/semantic-ui/2.1.8/semantic.min.js"></script>
+
+  <link href="fontawesome-iconpicker.min.css" rel="stylesheet">
+  <script src="fontawesome-iconpicker.js"></script>
+
   <style>
     body {
       padding: 20px;
@@ -302,10 +307,18 @@
     .toggle-switch-component .form-radio.radio {
       display: none;
     }
+
     .color-picker-component .form-radio.radio {
       display: none;
     }
 
+    .icon-picker-component .form-radio.radio {
+      display: none;
+    }
+    .iconpicker-popover.popover .popover-title input[type=search].iconpicker-search {
+      margin: 0 0 2px 0;
+      width: 185px;
+    }
   </style>
   <script type='text/javascript'>
 
@@ -343,7 +356,7 @@
             selectadditem: {
               title: 'Select add item',
               key: 'frm001_item',
-              icon: 'user-o',
+              icon: 'user',
               schema: {
                 "label": "Select",
                 "customClass": "newAdditem",
@@ -644,6 +657,86 @@
                 "fieldSet": false,
               }
             },
+            
+            FontIconPicker: {
+              title: 'FontIconPicker',
+              key: 'frm001_FontIconPicker',
+              icon: 'pencil-square',
+              schema: {
+                "label": "FontIcon Picker",
+                "optionsLabelPosition": "right",
+                "customClass": "icon-picker-component",
+                "inline": false,
+                "tableView": false,
+                "values": [
+                  {
+                    "label": "1",
+                    "value": "1",
+                    "shortcut": ""
+                  }
+                ],
+                "calculateServer": false,
+                "key": "radio",
+                "customConditional": "$('.icp-dd').iconpicker({\r\n          //title: 'Dropdown with picker',\r\n          //component:'.btn > i'\r\n  });",
+                "type": "radio",
+                "input": true,
+                "placeholder": "",
+                "prefix": "",
+                "suffix": "",
+                "multiple": false,
+                "defaultValue": null,
+                "protected": false,
+                "unique": false,
+                "persistent": true,
+                "hidden": false,
+                "clearOnHide": true,
+                "refreshOn": "",
+                "redrawOn": "",
+                "modalEdit": false,
+                "labelPosition": "top",
+                "description": "",
+                "errorLabel": "",
+                "tooltip": "",
+                "hideLabel": false,
+                "tabindex": "",
+                "disabled": false,
+                "autofocus": false,
+                "dbIndex": false,
+                "customDefaultValue": "",
+                "calculateValue": "",
+                "widget": null,
+                "attributes": {},
+                "validateOn": "change",
+                "validate": {
+                  "required": false,
+                  "custom": "",
+                  "customPrivate": false,
+                  "strictDateValidation": false,
+                  "multiple": false,
+                  "unique": false
+                },
+                "conditional": {
+                  "show": null,
+                  "when": null,
+                  "eq": ""
+                },
+                "overlay": {
+                  "style": "",
+                  "left": "",
+                  "top": "",
+                  "width": "",
+                  "height": ""
+                },
+                "allowCalculateOverride": false,
+                "encrypted": false,
+                "showCharCount": false,
+                "showWordCount": false,
+                "properties": {},
+                "allowMultipleMasks": false,
+                "inputType": "radio",
+                "fieldSet": false,
+              }
+            },
 
             toggle: {
               title: 'Toggle Switch',
@@ -751,10 +844,11 @@
           colorpickercomponent();
           colorpicker();
           switchcomponent();
+          fontpickercomponent();
+
           document.querySelector('#formjson').innerHTML = Prism.highlight(JSON.stringify(form, null, 2), Prism.languages.json, 'json');
           document.querySelector('#resultjson').innerHTML = Prism.highlight(JSON.stringify(formio.form.submission, null, 4), Prism.languages.json, 'json');
         });
-
         $('.newAdditem label').after('<div class="plus-item"><i class="fa fa-plus-circle" style="font-size: 15px;"></i></div><div class="user-icon-item ui dropdown"><div class=\'menu\'><div class=\'item\'>Customer</div><div class=\'item\'>Provider</div></div></div>');
         $('.plus-item').click(function () {
           $(this).parent().parent().find('.component-settings-button-edit').click();
@@ -763,6 +857,7 @@
         colorpickercomponent();
         colorpicker();
         switchcomponent();
+        fontpickercomponent();
         Formio.createForm(document.getElementById('formio-form'), form)
           .then((instance) => {
             formio.form = instance;
@@ -771,8 +866,11 @@
         // document.querySelector('#resultjson').innerHTML = Prism.highlight(JSON.stringify(formio.form.submission, null, 4), Prism.languages.json, 'json');
       });
     };
+    function fontpickercomponent() {
+      $('.icon-picker-component .form-radio.radio').parent().append('<br/><div class="btn-group"><button type="button" class="btn btn-primary iconpicker-component"><i class="fa fa-fw fa-heart"></i></button><button type="button" class="icp icp-dd btn btn-primary dropdown-toggle" data-selected="fa-car" data-toggle="dropdown"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><div class="dropdown-menu"></div></div>');
+    }
 
-    function colorpickercomponent(){
+    function colorpickercomponent() {
       $('.color-picker-component .form-radio.radio').parent().append('<div><input type="hidden" name="custom_color" placeholder="#FFFFFF" class="call-picker"><div onclick="myfunc($(this))" class="color-wrapper" ><div class="color-holder call-picker"></div><div class="drop-sign"></div></div><div class="color-picker" style="display: none"></div></div>');
     }
 
@@ -891,6 +989,7 @@
       </div>
     </div>
   </div>
+
 </body>
 
 </html>
