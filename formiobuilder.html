@@ -298,6 +298,9 @@
       background: #FFFFFF;
       box-shadow: inset 0px 1px 4px rgba(55, 55, 55, 0.3);
     }
+    .toggle-switch-component .form-radio.radio{
+      display: none;
+    }
   </style>
   <script type='text/javascript'>
 
@@ -497,7 +500,7 @@
                 key: 'frm001_mobile',
                 input: true
               }
-             },
+            },
             DataTime: {
               title: 'Date Time Picker',
               key: 'dateTime',
@@ -674,6 +677,84 @@
                 },
               }
             },
+            phoneNumber: {
+              title: 'Mobile Phone',
+              key: 'frm001_mobile',
+              icon: 'fa fa-phone-square',
+              schema: {
+                "label": "Toggle switch",
+                "optionsLabelPosition": "right",
+                "customClass": "toggle-switch-component",
+                "inline": false,
+                "tableView": false,
+                "values": [
+                  {
+                    "label": "1",
+                    "value": "1",
+                    "shortcut": ""
+                  }
+                ],
+                "calculateServer": false,
+                "key": "radio",
+                "type": "radio",
+                "input": true,
+                "placeholder": "",
+                "prefix": "",
+                "suffix": "",
+                "multiple": false,
+                "defaultValue": null,
+                "protected": false,
+                "unique": false,
+                "persistent": true,
+                "hidden": false,
+                "clearOnHide": true,
+                "refreshOn": "",
+                "redrawOn": "",
+                "modalEdit": false,
+                "labelPosition": "top",
+                "description": "",
+                "errorLabel": "",
+                "tooltip": "",
+                "hideLabel": false,
+                "tabindex": "",
+                "disabled": false,
+                "autofocus": false,
+                "dbIndex": false,
+                "customDefaultValue": "",
+                "calculateValue": "",
+                "widget": null,
+                "attributes": {},
+                "validateOn": "change",
+                "validate": {
+                  "required": false,
+                  "custom": "",
+                  "customPrivate": false,
+                  "strictDateValidation": false,
+                  "multiple": false,
+                  "unique": false
+                },
+                "conditional": {
+                  "show": null,
+                  "when": null,
+                  "eq": ""
+                },
+                "overlay": {
+                  "style": "",
+                  "left": "",
+                  "top": "",
+                  "width": "",
+                  "height": ""
+                },
+                "allowCalculateOverride": false,
+                "encrypted": false,
+                "showCharCount": false,
+                "showWordCount": false,
+                "properties": {},
+                "allowMultipleMasks": false,
+                "inputType": "radio",
+                "fieldSet": false,
+              }
+            },
           }
         },
 
@@ -693,24 +774,25 @@
           formio.form.render();
           formio.form.form = form;
           formio.form.render();
-          
+
           $('.newAdditem label').after('<div class="plus-item"><i class="fa fa-plus-circle" style="font-size: 15px;"></i></div><div class="user-icon-item ui dropdown"><div class=\'menu\'><div class=\'item\'>Customer</div><div class=\'item\'>Provider</div></div></div>');
           $('.plus-item').click(function () {
             $(this).parent().parent().find('.component-settings-button-edit').click();
           });
           $('.dropdown').dropdown();
           colorpicker();
+          switchcomponent();
           document.querySelector('#formjson').innerHTML = Prism.highlight(JSON.stringify(form, null, 2), Prism.languages.json, 'json');
           document.querySelector('#resultjson').innerHTML = Prism.highlight(JSON.stringify(formio.form.submission, null, 4), Prism.languages.json, 'json');
         });
-        
+
         $('.newAdditem label').after('<div class="plus-item"><i class="fa fa-plus-circle" style="font-size: 15px;"></i></div><div class="user-icon-item ui dropdown"><div class=\'menu\'><div class=\'item\'>Customer</div><div class=\'item\'>Provider</div></div></div>');
         $('.plus-item').click(function () {
           $(this).parent().parent().find('.component-settings-button-edit').click();
         });
         $('.dropdown').dropdown();
         colorpicker();
-
+        switchcomponent();
         Formio.createForm(document.getElementById('formio-form'), form)
           .then((instance) => {
             formio.form = instance;
@@ -719,76 +801,79 @@
         // document.querySelector('#resultjson').innerHTML = Prism.highlight(JSON.stringify(formio.form.submission, null, 4), Prism.languages.json, 'json');
       });
     };
-    function colorpicker(){
+    function switchcomponent(){
+      $('.toggle-switch-component .form-radio.radio').parent().append('<div class="toggle-switch"><label class="switch"><input type="checkbox" checked><span class="slider round"></span></label></div>');
+    }
+    function colorpicker() {
       $('.color-wrapper').click(function (event) {
-      // console.log(tab);
-      var colorList = [
-        '255, 22, 84',
-        '34, 177, 219',
-        '84, 84, 225',
-        '36, 123, 160',
-        '160, 36, 123',
-        '123, 160, 36',
-        '34, 122, 122',
-        '160, 160, 23',
-        '36, 210, 36',
-        '112, 193, 179',
-        '146, 179, 0',
-        '0, 179, 146',
-        '203, 177, 219',
-        '177, 219, 203',
-        '193, 191, 112',
-        '112, 191, 112',
-        '0,0,128',
-        '0,128,128',
-        '128,0,128',
-        '0,128,0',
-        '128,128,0',
-        '128,0,0',
-        '128,128,128',
-        '192,192,192',
-        '255,0,255',
-        '0,255,255',
-        '255,255,0',
-        '22, 84, 225',
-        '0,0,255',
-        '0,255,0',
-        '255,0,0',
-        '0,0,0',
-        '0,102,102',
-        '102,102,0',
-        '102,0,102',
-      ];
+        // console.log(tab);
+        var colorList = [
+          '255, 22, 84',
+          '34, 177, 219',
+          '84, 84, 225',
+          '36, 123, 160',
+          '160, 36, 123',
+          '123, 160, 36',
+          '34, 122, 122',
+          '160, 160, 23',
+          '36, 210, 36',
+          '112, 193, 179',
+          '146, 179, 0',
+          '0, 179, 146',
+          '203, 177, 219',
+          '177, 219, 203',
+          '193, 191, 112',
+          '112, 191, 112',
+          '0,0,128',
+          '0,128,128',
+          '128,0,128',
+          '0,128,0',
+          '128,128,0',
+          '128,0,0',
+          '128,128,128',
+          '192,192,192',
+          '255,0,255',
+          '0,255,255',
+          '255,255,0',
+          '22, 84, 225',
+          '0,0,255',
+          '0,255,0',
+          '255,0,0',
+          '0,0,0',
+          '0,102,102',
+          '102,102,0',
+          '102,0,102',
+        ];
 
-      // $('.color-picker').fadeOut();
-      $('.color-picker-content').remove();
-      var picker = $(this).parent().find('.color-picker');
+        // $('.color-picker').fadeOut();
+        $('.color-picker-content').remove();
+        var picker = $(this).parent().find('.color-picker');
 
-      for (var i = 0; i < colorList.length; i++) {
-        picker.append('<div class="color-picker-content"><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',1)" style="background-color:' + 'rgba(' + colorList[i] + ',1);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.8)" style="background-color:' + 'rgba(' + colorList[i] + ',0.8);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.6)" style="background-color:' + 'rgba(' + colorList[i] + ',0.6);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.4)" style="background-color:' + 'rgba(' + colorList[i] + ',0.4);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.2)" style="background-color:' + 'rgba(' + colorList[i] + ',0.2);"></li></div>');
-      }
-      event.stopPropagation();
-      picker.fadeIn();
-      picker.find('li').hover(function () {
-        var codeHex = $(this).data('hex');
-        $(this).parent().parent().parent().find('.color-holder').css('background-color', codeHex);
-        $(this).parent().parent().parent().find('input').val(codeHex);
+        for (var i = 0; i < colorList.length; i++) {
+          picker.append('<div class="color-picker-content"><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',1)" style="background-color:' + 'rgba(' + colorList[i] + ',1);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.8)" style="background-color:' + 'rgba(' + colorList[i] + ',0.8);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.6)" style="background-color:' + 'rgba(' + colorList[i] + ',0.6);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.4)" style="background-color:' + 'rgba(' + colorList[i] + ',0.4);"></li><li class="color-item" data-hex="' + 'rgba(' + colorList[i] + ',0.2)" style="background-color:' + 'rgba(' + colorList[i] + ',0.2);"></li></div>');
+        }
+        event.stopPropagation();
+        picker.fadeIn();
+        picker.find('li').hover(function () {
+          var codeHex = $(this).data('hex');
+          $(this).parent().parent().parent().find('.color-holder').css('background-color', codeHex);
+          $(this).parent().parent().parent().find('input').val(codeHex);
+        });
+        picker.find('li').mouseleave(function () {
+
+          $(this).parent().parent().parent().find('.color-holder').css('background-color', 'white');
+        });
+
+        picker.find('li').click(function () {
+          var codeHex = $(this).data('hex');
+          $(this).parent().parent().parent().find('.color-holder').css('background-color', codeHex);
+          $(this).parent().parent().parent().find('input').val(codeHex);
+
+        });
       });
-      picker.find('li').mouseleave(function () {
-
-        $(this).parent().parent().parent().find('.color-holder').css('background-color', 'white');
-      });
-
-      picker.find('li').click(function () {
-        var codeHex = $(this).data('hex');
-        $(this).parent().parent().parent().find('.color-holder').css('background-color', codeHex);
-        $(this).parent().parent().parent().find('input').val(codeHex);
-
-      });
-    });
       $('body').click(function () {
-          $('.color-picker').fadeOut();
-          $('.color-picker-content').remove();
+        $('.color-picker').fadeOut();
+        $('.color-picker-content').remove();
       });
     }
 
