@@ -25,6 +25,23 @@
   <script src="fontawesome-iconpicker.js"></script>
   <link href="style.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cldrjs/0.4.4/cldr.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cldrjs/0.4.4/cldr/event.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cldrjs/0.4.4/cldr/supplemental.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cldrjs/0.4.4/cldr/unresolved.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.1.1/globalize.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.1.1/globalize/message.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.1.1/globalize/number.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.1.1/globalize/currency.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.1.1/globalize/date.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/20.1.3/css/dx.common.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/20.1.3/css/dx.light.css" />
+  <script src="https://cdn3.devexpress.com/jslib/20.1.3/js/dx.all.js"></script>
+
   <script type='text/javascript'>
 
     const form = {
@@ -155,69 +172,33 @@
               }
             },
 
-            myfonticon: {
-              title: 'Font Icon Picker',
-              key: 'frm001_myfonticon',
-              icon: 'pencil-square',
-              schema: {
-                label: 'Mobile Phone',
-                type: 'phoneNumber',
-                key: 'frm001_mobile',
-                input: true
-              }
-            },
-            DataTime: {
-              title: 'Date Time Picker',
-              key: 'dateTime',
+            datetimepicker: {
+              title: 'Date & time Picker',
+              key: 'frm001_dtpicker',
               icon: 'calendar-check-o',
               schema: {
-                "label": "Date / Time",
-                "format": "yyyy-MM-dd",
-                "placeholder": "YYYY-MM-DD",
-                "customClass": "newCalendar",
+                "label": "Date & time Picker",
+                "optionsLabelPosition": "right",
+                "customClass": "datetime-picker-component",
+                "inline": false,
                 "tableView": false,
-                "enableMinDateInput": false,
-                "datePicker": {
-                  "disableWeekends": false,
-                  "disableWeekdays": false,
-                  "showWeeks": true,
-                  "startingDay": 0,
-                  "initDate": "",
-                  "minMode": "day",
-                  "maxMode": "year",
-                  "yearRows": 4,
-                  "yearColumns": 5,
-                  "minDate": null,
-                  "maxDate": null
-                },
-                "enableMaxDateInput": false,
-                "enableTime": false,
+                "values": [
+                  {
+                    "label": "1",
+                    "value": "1",
+                    "shortcut": ""
+                  }
+                ],
                 "calculateServer": false,
-                "key": "dateTime",
-                "type": "datetime",
+                "key": "dateTimePicker",
+                "customConditional": "$(function () {\r\n            var now = new Date();\r\n            $(\".date-time\").dxDateBox({\r\n                type: \"datetime\",\r\n                value: now\r\n            });\r\n        });",
+                "type": "radio",
                 "input": true,
-                "suffix": "<i ref=\"icon\" class=\"fa fa-calendar\" style=\"\"></i>",
-                "widget": {
-                  "type": "calendar",
-                  "displayInTimezone": "viewer",
-                  "language": "en",
-                  "useLocaleSettings": false,
-                  "allowInput": true,
-                  "mode": "single",
-                  "enableTime": false,
-                  "noCalendar": false,
-                  "format": "yyyy-MM-dd",
-                  "hourIncrement": 1,
-                  "minuteIncrement": 1,
-                  "time_24hr": false,
-                  "minDate": null,
-                  "disableWeekends": false,
-                  "disableWeekdays": false,
-                  "maxDate": null
-                },
+                "placeholder": "",
                 "prefix": "",
+                "suffix": "",
                 "multiple": false,
-                "defaultValue": "",
+                "defaultValue": null,
                 "protected": false,
                 "unique": false,
                 "persistent": true,
@@ -237,6 +218,7 @@
                 "dbIndex": false,
                 "customDefaultValue": "",
                 "calculateValue": "",
+                "widget": null,
                 "attributes": {},
                 "validateOn": "change",
                 "validate": {
@@ -265,22 +247,88 @@
                 "showWordCount": false,
                 "properties": {},
                 "allowMultipleMasks": false,
-                "useLocaleSettings": false,
-                "allowInput": true,
-                "enableDate": true,
-                "defaultDate": "",
-                "displayInTimezone": "viewer",
-                "timezone": "",
-                "datepickerMode": "day",
-                "timePicker": {
-                  "hourStep": 1,
-                  "minuteStep": 1,
-                  "showMeridian": true,
-                  "readonlyInput": false,
-                  "mousewheel": true,
-                  "arrowkeys": true
+                "inputType": "radio",
+                "fieldSet": false,
+              }
+            },
+
+            datepicker: {
+              title: 'Date Picker',
+              key: 'frm001_datepicker',
+              icon: 'calendar-check',
+              schema: {
+                "label": "Date Picker",
+                "optionsLabelPosition": "right",
+                "customClass": "date-picker-component",
+                "inline": false,
+                "tableView": false,
+                "values": [
+                  {
+                    "label": "1",
+                    "value": "1",
+                    "shortcut": ""
+                  }
+                ],
+                "calculateServer": false,
+                "key": "datePicker",
+                "customConditional": "$(function () {\r\n            var now = new Date();\r\n            $(\".date-picker\").dxDateBox({\r\n                type: \"date\",\r\n                value: now\r\n            });\r\n        });",
+                "type": "radio",
+                "input": true,
+                "placeholder": "",
+                "prefix": "",
+                "suffix": "",
+                "multiple": false,
+                "defaultValue": null,
+                "protected": false,
+                "unique": false,
+                "persistent": true,
+                "hidden": false,
+                "clearOnHide": true,
+                "refreshOn": "",
+                "redrawOn": "",
+                "modalEdit": false,
+                "labelPosition": "top",
+                "description": "",
+                "errorLabel": "",
+                "tooltip": "",
+                "hideLabel": false,
+                "tabindex": "",
+                "disabled": false,
+                "autofocus": false,
+                "dbIndex": false,
+                "customDefaultValue": "",
+                "calculateValue": "",
+                "widget": null,
+                "attributes": {},
+                "validateOn": "change",
+                "validate": {
+                  "required": false,
+                  "custom": "",
+                  "customPrivate": false,
+                  "strictDateValidation": false,
+                  "multiple": false,
+                  "unique": false
                 },
-                "customOptions": {},
+                "conditional": {
+                  "show": null,
+                  "when": null,
+                  "eq": ""
+                },
+                "overlay": {
+                  "style": "",
+                  "left": "",
+                  "top": "",
+                  "width": "",
+                  "height": ""
+                },
+                "allowCalculateOverride": false,
+                "encrypted": false,
+                "showCharCount": false,
+                "showWordCount": false,
+                "properties": {},
+                "allowMultipleMasks": false,
+                "inputType": "radio",
+                "fieldSet": false,
               }
             },
 
@@ -550,7 +598,8 @@
           colorpicker();
           switchcomponent();
           fontpickercomponent();
-
+          datetimecomponent();
+          datecomponent();
           document.querySelector('#formjson').innerHTML = Prism.highlight(JSON.stringify(form, null, 2), Prism.languages.json, 'json');
           document.querySelector('#resultjson').innerHTML = Prism.highlight(JSON.stringify(formio.form.submission, null, 4), Prism.languages.json, 'json');
         });
@@ -563,6 +612,8 @@
         colorpicker();
         switchcomponent();
         fontpickercomponent();
+        datetimecomponent();
+        datecomponent();
         Formio.createForm(document.getElementById('formio-form'), form)
           .then((instance) => {
             formio.form = instance;
@@ -571,6 +622,12 @@
         // document.querySelector('#resultjson').innerHTML = Prism.highlight(JSON.stringify(formio.form.submission, null, 4), Prism.languages.json, 'json');
       });
     };
+    function datecomponent() {
+      $('.date-picker-component .form-radio.radio').parent().append('<div class="dx-field"><div class="date-picker"></div></div>');
+    }
+    function datetimecomponent() {
+      $('.datetime-picker-component .form-radio.radio').parent().append('<div class="dx-field"><div class="date-time"></div></div>');
+    }
     function fontpickercomponent() {
       $('.icon-picker-component .form-radio.radio').parent().append('<br/><div class="btn-group"><button type="button" class="btn btn-primary iconpicker-component"><i class="fa fa-fw fa-heart"></i></button><button type="button" class="icp icp-dd btn btn-primary dropdown-toggle" data-selected="fa-car" data-toggle="dropdown"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><div class="dropdown-menu"></div></div>');
     }

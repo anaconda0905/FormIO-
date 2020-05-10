@@ -291,3 +291,11 @@ input.call-picker {
     margin: 0 0 2px 0;
     width: 185px;
 }
+
+.datetime-picker-component .form-radio.radio {
+    display: none;
+}
+
+.date-picker-component .form-radio.radio {
+    display: none;
+}
