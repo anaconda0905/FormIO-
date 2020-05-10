@@ -298,9 +298,14 @@
       background: #FFFFFF;
       box-shadow: inset 0px 1px 4px rgba(55, 55, 55, 0.3);
     }
-    .toggle-switch-component .form-radio.radio{
+
+    .toggle-switch-component .form-radio.radio {
       display: none;
     }
+    .color-picker-component .form-radio.radio {
+      display: none;
+    }
+
   </style>
   <script type='text/javascript'>
 
@@ -432,64 +437,6 @@
               }
             },
 
-            toggle: {
-              title: 'Toggle Switch',
-              key: 'frm001_toggle',
-              icon: 'toggle-on',
-              schema: {
-                "tag": "div",
-                "className": "",
-                "attrs": [],
-                "content": "\r\n<div class=\"toggle-switch\">\r\n\t<label class=\"control-label\" style=\"\">Active</label><br/>\r\n\t<label class=\"switch\">\r\n\r\n\t  <input type=\"checkbox\" checked>\r\n\t  <span class=\"slider round\"></span>\r\n\t</label>\r\n</div>",
-                "refreshOnChange": false,
-                "mask": false,
-                "tableView": true,
-                "alwaysEnabled": false,
-                "type": "htmlelement",
-                "input": false,
-                "key": "frm001_toggle",
-                "placeholder": "",
-                "prefix": "",
-                "customClass": "",
-                "suffix": "",
-                "multiple": false,
-                "defaultValue": null,
-                "protected": false,
-                "unique": false,
-                "persistent": false,
-                "hidden": false,
-                "clearOnHide": true,
-                "dataGridLabel": false,
-                "labelPosition": "top",
-                "labelWidth": 30,
-                "labelMargin": 3,
-                "description": "",
-                "errorLabel": "",
-                "tooltip": "",
-                "hideLabel": false,
-                "tabindex": "",
-                "disabled": false,
-                "autofocus": false,
-                "dbIndex": false,
-                "customDefaultValue": "",
-                "calculateValue": "",
-                "allowCalculateOverride": false,
-                "widget": null,
-                "refreshOn": "",
-                "clearOnRefresh": false,
-                "validateOn": "change",
-                "validate": {
-                  "required": false,
-                  "custom": "",
-                  "customPrivate": false
-                },
-                "conditional": {
-                  "show": null,
-                  "when": null,
-                  "eq": ""
-                },
-              }
-            },
             myfonticon: {
               title: 'Font Icon Picker',
               key: 'frm001_myfonticon',
@@ -618,38 +565,42 @@
                 "customOptions": {},
               }
             },
+
             ColorPicker: {
               title: 'Color Picker',
               key: 'frm001_color',
               icon: 'newspaper-o',
               schema: {
-                "label": "HTML",
-                "tag": "div",
-                "className": "",
-                "attrs": [],
-                "content": "<div>\r\n        <label class=\"control-label\">Color Component Label</label><br />\r\n        <input type=\"hidden\" name=\"custom_color\" placeholder=\"#FFFFFF\" class=\"call-picker\">\r\n        <div onclick=\"myfunc($(this))\" class=\"color-wrapper\" >\r\n            <div class=\"color-holder call-picker\"></div>\r\n            <div class=\"drop-sign\"></div>\r\n        </div>\r\n        <div class=\"color-picker\" style=\"display: none\"></div>\r\n    </div>",
-                "refreshOnChange": false,
-                "mask": false,
-                "tableView": true,
-                "alwaysEnabled": false,
-                "type": "htmlelement",
-                "input": false,
-                "key": "html",
+                "label": "Color picker",
+                "optionsLabelPosition": "right",
+                "customClass": "color-picker-component",
+                "inline": false,
+                "tableView": false,
+                "values": [
+                  {
+                    "label": "1",
+                    "value": "1",
+                    "shortcut": ""
+                  }
+                ],
+                "calculateServer": false,
+                "key": "radio1",
+                "type": "radio",
+                "input": true,
                 "placeholder": "",
                 "prefix": "",
-                "customClass": "",
                 "suffix": "",
                 "multiple": false,
                 "defaultValue": null,
                 "protected": false,
                 "unique": false,
-                "persistent": false,
+                "persistent": true,
                 "hidden": false,
                 "clearOnHide": true,
-                "dataGridLabel": false,
+                "refreshOn": "",
+                "redrawOn": "",
+                "modalEdit": false,
                 "labelPosition": "top",
-                "labelWidth": 30,
-                "labelMargin": 3,
                 "description": "",
                 "errorLabel": "",
                 "tooltip": "",
@@ -660,27 +611,44 @@
                 "dbIndex": false,
                 "customDefaultValue": "",
                 "calculateValue": "",
-                "allowCalculateOverride": false,
                 "widget": null,
-                "refreshOn": "",
-                "clearOnRefresh": false,
+                "attributes": {},
                 "validateOn": "change",
                 "validate": {
                   "required": false,
                   "custom": "",
-                  "customPrivate": false
+                  "customPrivate": false,
+                  "strictDateValidation": false,
+                  "multiple": false,
+                  "unique": false
                 },
                 "conditional": {
                   "show": null,
                   "when": null,
                   "eq": ""
                 },
+                "overlay": {
+                  "style": "",
+                  "left": "",
+                  "top": "",
+                  "width": "",
+                  "height": ""
+                },
+                "allowCalculateOverride": false,
+                "encrypted": false,
+                "showCharCount": false,
+                "showWordCount": false,
+                "properties": {},
+                "allowMultipleMasks": false,
+                "inputType": "radio",
+                "fieldSet": false,
               }
             },
-            phoneNumber: {
-              title: 'Mobile Phone',
-              key: 'frm001_mobile',
-              icon: 'fa fa-phone-square',
+
+            toggle: {
+              title: 'Toggle Switch',
+              key: 'frm001_toggle',
+              icon: 'toggle-on',
               schema: {
                 "label": "Toggle switch",
                 "optionsLabelPosition": "right",
@@ -780,6 +748,7 @@
             $(this).parent().parent().find('.component-settings-button-edit').click();
           });
           $('.dropdown').dropdown();
+          colorpickercomponent();
           colorpicker();
           switchcomponent();
           document.querySelector('#formjson').innerHTML = Prism.highlight(JSON.stringify(form, null, 2), Prism.languages.json, 'json');
@@ -791,6 +760,7 @@
           $(this).parent().parent().find('.component-settings-button-edit').click();
         });
         $('.dropdown').dropdown();
+        colorpickercomponent();
         colorpicker();
         switchcomponent();
         Formio.createForm(document.getElementById('formio-form'), form)
@@ -801,9 +771,15 @@
         // document.querySelector('#resultjson').innerHTML = Prism.highlight(JSON.stringify(formio.form.submission, null, 4), Prism.languages.json, 'json');
       });
     };
-    function switchcomponent(){
+
+    function colorpickercomponent(){
+      $('.color-picker-component .form-radio.radio').parent().append('<div><input type="hidden" name="custom_color" placeholder="#FFFFFF" class="call-picker"><div onclick="myfunc($(this))" class="color-wrapper" ><div class="color-holder call-picker"></div><div class="drop-sign"></div></div><div class="color-picker" style="display: none"></div></div>');
+    }
+
+    function switchcomponent() {
       $('.toggle-switch-component .form-radio.radio').parent().append('<div class="toggle-switch"><label class="switch"><input type="checkbox" checked><span class="slider round"></span></label></div>');
     }
+
     function colorpicker() {
       $('.color-wrapper').click(function (event) {
         // console.log(tab);
