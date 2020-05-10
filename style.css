@@ -299,3 +299,7 @@ input.call-picker {
 .date-picker-component .form-radio.radio {
     display: none;
 }
+
+.time-picker-component .form-radio.radio {
+    display: none;
+}

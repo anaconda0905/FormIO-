@@ -332,6 +332,86 @@
               }
             },
 
+            timepicker: {
+              title: 'Time Picker',
+              key: 'frm001_timepicker',
+              icon: 'time',
+              schema: {
+                "label": "Time Picker",
+                "optionsLabelPosition": "right",
+                "customClass": "time-picker-component",
+                "inline": false,
+                "tableView": false,
+                "values": [
+                  {
+                    "label": "1",
+                    "value": "1",
+                    "shortcut": ""
+                  }
+                ],
+                "calculateServer": false,
+                "key": "timePicker",
+                "customConditional": "$(function () {\r\n            var now = new Date();\r\n            $(\".time-picker\").dxDateBox({\r\n                type: \"time\",\r\n                value: now\r\n            });\r\n        });",
+                "type": "radio",
+                "input": true,
+                "placeholder": "",
+                "prefix": "",
+                "suffix": "",
+                "multiple": false,
+                "defaultValue": null,
+                "protected": false,
+                "unique": false,
+                "persistent": true,
+                "hidden": false,
+                "clearOnHide": true,
+                "refreshOn": "",
+                "redrawOn": "",
+                "modalEdit": false,
+                "labelPosition": "top",
+                "description": "",
+                "errorLabel": "",
+                "tooltip": "",
+                "hideLabel": false,
+                "tabindex": "",
+                "disabled": false,
+                "autofocus": false,
+                "dbIndex": false,
+                "customDefaultValue": "",
+                "calculateValue": "",
+                "widget": null,
+                "attributes": {},
+                "validateOn": "change",
+                "validate": {
+                  "required": false,
+                  "custom": "",
+                  "customPrivate": false,
+                  "strictDateValidation": false,
+                  "multiple": false,
+                  "unique": false
+                },
+                "conditional": {
+                  "show": null,
+                  "when": null,
+                  "eq": ""
+                },
+                "overlay": {
+                  "style": "",
+                  "left": "",
+                  "top": "",
+                  "width": "",
+                  "height": ""
+                },
+                "allowCalculateOverride": false,
+                "encrypted": false,
+                "showCharCount": false,
+                "showWordCount": false,
+                "properties": {},
+                "allowMultipleMasks": false,
+                "inputType": "radio",
+                "fieldSet": false,
+              }
+            },
+
             ColorPicker: {
               title: 'Color Picker',
               key: 'frm001_color',
@@ -600,6 +680,7 @@
           fontpickercomponent();
           datetimecomponent();
           datecomponent();
+          timecomponent();
           document.querySelector('#formjson').innerHTML = Prism.highlight(JSON.stringify(form, null, 2), Prism.languages.json, 'json');
           document.querySelector('#resultjson').innerHTML = Prism.highlight(JSON.stringify(formio.form.submission, null, 4), Prism.languages.json, 'json');
         });
@@ -614,6 +695,7 @@
         fontpickercomponent();
         datetimecomponent();
         datecomponent();
+        timecomponent();
         Formio.createForm(document.getElementById('formio-form'), form)
           .then((instance) => {
             formio.form = instance;
@@ -622,6 +704,9 @@
         // document.querySelector('#resultjson').innerHTML = Prism.highlight(JSON.stringify(formio.form.submission, null, 4), Prism.languages.json, 'json');
       });
     };
+    function timecomponent() {
+      $('.time-picker-component .form-radio.radio').parent().append('<div class="dx-field"><div class="time-picker"></div></div>');
+    }
     function datecomponent() {
       $('.date-picker-component .form-radio.radio').parent().append('<div class="dx-field"><div class="date-picker"></div></div>');
     }
